@@ -103,15 +103,10 @@ Rgba32 whiteColot = Color.White;
 //    slice531Image.Save(outputImage, format);
 //}
 
-
 Console.WriteLine("80 done!");
-
-
 
 for (int c = 0; c < 32; c++)
 {
-    Console.WriteLine(slice516MultiDimention[0, c, 0, 0]);
-
     using var outputImage = File.OpenWrite($"asset\\160out{c}.jpg");
     using Image<Rgba32> slice516Image = new Image<Rgba32>(160, 160);
     slice516Image.ProcessPixelRows(accessor =>
@@ -122,25 +117,20 @@ for (int c = 0; c < 32; c++)
 
             for (int x = 0; x < accessor.Width; x++)
             {
-                if (slice516MultiDimention[0, c, y, x] > 0.5F ) //1.0F
-                {
-                    //Console.WriteLine($"what is you value C? {slice516MultiDimention[0, c, y, x]}");
+                ref Rgba32 pixel = ref pixelRow[x];
 
-                    ref Rgba32 pixel = ref pixelRow[x];
-
-                    if (slice516MultiDimention[0, c, y, x] < 0)
-                        pixel.R = 0;
-                    else
-                        pixel.R = 255;
-                    if (slice516MultiDimention[0, c, y, x] < 0)
-                        pixel.G = 0;
-                    else
-                        pixel.G = 255;
-                    if (slice516MultiDimention[0, c, y, x] < 0)
-                        pixel.B = 0;
-                    else
-                        pixel.B = 255;
-                }
+                if (slice516MultiDimention[0, c, y, x] < 0)
+                    pixel.R = 0;
+                else
+                    pixel.R = 255;
+                if (slice516MultiDimention[0, c, y, x] < 0)
+                    pixel.G = 0;
+                else
+                    pixel.G = 255;
+                if (slice516MultiDimention[0, c, y, x] < 0)
+                    pixel.B = 0;
+                else
+                    pixel.B = 255;
             }
         }
     });
